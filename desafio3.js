@@ -2,7 +2,7 @@
 
 const fin = (a) => console.log(`Proceso terminado , la cantidad de palabras es: ${a}`)
 
-const dividirCadena = (/*cadenaADividir,retardo,cb*/...array) => new Promise ( resuelve =>{
+const dividirCadena = (...array) => new Promise ( resuelve =>{
    
     if(isNaN(array[1]))  {retardo=1000 }else {retardo = array[1]}
    if (typeof array[1] === 'function') {cb= array[1]} else {cb = fin}
