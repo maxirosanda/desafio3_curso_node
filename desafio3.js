@@ -2,8 +2,13 @@
 
 const fin = (a) => console.log(`Proceso terminado , la cantidad de palabras es: ${a}`)
 
-const dividirCadena = (cadenaADividir,retardo=1000,cb) => new Promise ( resuelve =>{
-    var arrayDeCadenas = cadenaADividir.split(" ")
+const dividirCadena = (/*cadenaADividir,retardo,cb*/...array) => new Promise ( resuelve =>{
+   
+    if(isNaN(array[1]))  {retardo=1000 }else {retardo = array[1]}
+   if (typeof array[1] === 'function') {cb= array[1]} else {cb = fin}
+   if (typeof array[2] === 'function') {cb= array[2]} else { cb = fin}
+
+    var arrayDeCadenas = array[0].split(" ")
 
     for (let i in arrayDeCadenas) {
         
@@ -32,6 +37,8 @@ var cadenaVerso = "Es sobre esta atestiguación que el equipo de Creación Morga
 var cadenaVerso2 = "Oh brave new world that has such people in it."
 var cadenaVerso3 = "Iniciales bordadas en el interior de la chaqueta, trajes de gala, de los chalecos fraces y colas de urraca."
 
-dividirCadena(cadenaVerso,500,fin).then(() => dividirCadena(cadenaVerso2,undefined,fin)).then(() => dividirCadena(cadenaVerso3,200,fin))
+dividirCadena(cadenaVerso,500,(a)=>{console.log(`pase la funcion por parametro. cant palabras:${a}`)})
+.then(() => dividirCadena(cadenaVerso2))
+.then(() => dividirCadena(cadenaVerso3,200,fin))
     
  
